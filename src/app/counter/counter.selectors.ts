@@ -1,9 +1,11 @@
-import { createSelector } from '@ngrx/store';
+import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { AppState } from '../app.interfaces';
+import { CounterState } from './counter.reducers';
 
-export const selectCounter = (state: AppState) => state.counter;
+// export const counterSelector = (state: AppState) => state.counter;
+export const counterSelector = createFeatureSelector<AppState, CounterState>('counter')
 
-export const selectCount = createSelector(
-  selectCounter,
-  (counterState) => counterState.count
+export const countSelector = createSelector(
+  counterSelector,
+  (counterState: CounterState) => counterState.count
 );
